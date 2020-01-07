@@ -17,3 +17,5 @@ Table 2 Several classic compression methods and comparison
 <center><img src='https://github.com/kzhang14/Pruning/blob/master/resources/fig2.bmp'></center>
 
 We are aiming to compress the CNN size by exploring the how much redundancy still exists in the network, by promoting certain sparse structures of the network. For the FC layer, we promote a diagonal structure which shrinks the layer size from O(NM) to O(min(M,N)). For the convolutional layer, we use the CP-decomposition and Tucker decomposition to decompose a convolution layer. Each of the above compression performing on most of the current imageset can achieve around ~1% accuracy loss, sometimes even no loss. Here we are curious to see the results of them combining together. 
+
+CP decomposition is a typical low rank method for compressing 2D convolutional layers. However, the drawback of CP-decomposition is that finding the best low-rank approximation is an ill-posed problem, and the best rank-K approximation mau not exist sometimes.
