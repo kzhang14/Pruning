@@ -19,3 +19,22 @@ Table 2 Several classic compression methods and comparison
 We are aiming to compress the CNN size by exploring the how much redundancy still exists in the network, by promoting certain sparse structures of the network. For the FC layer, we promote a diagonal structure which shrinks the layer size from O(NM) to O(min(M,N)). For the convolutional layer, we use the CP-decomposition and Tucker decomposition to decompose a convolution layer. Each of the above compression performing on most of the current imageset can achieve around ~1% accuracy loss, sometimes even no loss. Here we are curious to see the results of them combining together. 
 
 CP decomposition is a typical low rank method for compressing 2D convolutional layers. However, the drawback of CP-decomposition is that finding the best low-rank approximation is an ill-posed problem, and the best rank-K approximation mau not exist sometimes.
+
+
+Usage
+Train a model based on fine tuning VGG16/Alexnet/VGG19.
+
+There should be a dataset with two categories. One directory for each category. Training data should go into a directory called 'train'. Testing data should go into a directory called 'test'. This can be controlled with the flags --train_path and --test_path.
+
+I used the Kaggle Cats/Dogs dataset, and the Bees/Ants set.
+
+The model is then saved into a file called "model".
+
+Perform a decomposition: python main.py --decompose This saves the new model into "decomposed_model". It uses the Tucker decomposition by default. To use CP decomposition, pass --cp.
+
+References
+CP Decomposition for convolutional layers is described here: https://arxiv.org/abs/1412.6553
+Tucker Decomposition for convolutional layers is described here: https://arxiv.org/abs/1511.06530
+VBMF for rank selection is described here: http://www.jmlr.org/papers/volume14/nakajima13a/nakajima13a.pdf
+VBMF code was taken from here: https://github.com/CasvandenBogaard/VBMF
+Tensorly: https://github.com/tensorly/tensorly
